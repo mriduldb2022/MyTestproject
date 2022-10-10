@@ -1,17 +1,23 @@
 package com.Utils;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.BasePage.BaseClass;
+import com.google.common.io.Files;
 
 public class Utilities extends BaseClass {
 
 	public static WebElement getExplicitWait(WebElement element, long time) {
-		WebDriverWait wait = new WebDriverWait(driver, time);                    //Webdrive is an interface.
+		WebDriverWait wait = new WebDriverWait(driver, time);                    //Webdriver is an interface.
 		WebElement elem = wait.until(ExpectedConditions.elementToBeClickable(element));
 		return elem;
 	}
@@ -26,19 +32,49 @@ public class Utilities extends BaseClass {
 		action.click().build().perform();
 	}
 	
-	// JavaScript Executor - Casting : FOR CLICKING: 
+	
 	public static void jsClick (WebElement element) {
-		JavascriptExecutor executor = (JavascriptExecutor) driver; //CASTING 
+		JavascriptExecutor executor = (JavascriptExecutor) driver; //CASTING- changing the type of the object, // JavaScript Executor - Casting : FOR CLICKING: 
 		executor.executeScript("arguments[0].click();", element);
 	}
 	
-	// JavaScript Executor - Casting : FOR SCROLL IN TO VIEW : 
+	
 	public static void elementScroll(WebElement element) {
-		JavascriptExecutor executor = (JavascriptExecutor) driver; //CASTING 
+		JavascriptExecutor executor = (JavascriptExecutor) driver; //CASTING-// JavaScript Executor -  FOR SCROLL IN TO VIEW :  
 		executor.executeScript("arguments[0].scrollIntoView", element);
 		
 	}
-	// JavaScript Executor - Casting : FOR scroll to bottom page : 
+	
+	public static void scroolToBottomPage() {
+		JavascriptExecutor executor = (JavascriptExecutor) driver; // JavaScript Executor - Casting : FOR scroll to bottom page : 
+		executor.executeScript("Window.scrollto(0, document.body.scrollHeights)");
+		
+	}
+	
+	public static void scrollToPage () {
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("window.scrollTo(0,0)");
+		
+	}
+	public static void takeScreenShot() throws IOException {
+		File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		File targetFile = new File(System.getProperty("user.dir")+ "//screenshot.screenshot.png");
+		targetFile.getParentFile().mkdir();
+		srcFile.createNewFile();
+		Files.copy(srcFile, targetFile);
+	}
+	public static void getHighLighter(WebElement element) {
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].setAttribute('style','background: yellow; border: 4px solid red;');", element);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
