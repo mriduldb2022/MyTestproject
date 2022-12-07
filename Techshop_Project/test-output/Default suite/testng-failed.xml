@@ -5,8 +5,10 @@
     <classes>
       <class name="com.smarttechqa.runner.FeatureRunner">
         <methods>
-          <include name="runScenario" invocation-numbers="0"/>
+          <include name="beforeClass"/>
+          <include name="runScenario" invocation-numbers="0 1"/>
           <include name="tearDownClass"/>
+          <include name="afterClass"/>
           <include name="setUpClass"/>
         </methods>
       </class> <!-- com.smarttechqa.runner.FeatureRunner -->

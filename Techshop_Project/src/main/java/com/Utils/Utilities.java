@@ -2,6 +2,7 @@ package com.Utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
@@ -62,6 +63,7 @@ public class Utilities extends BaseClass {
 		targetFile.getParentFile().mkdir();
 		srcFile.createNewFile();
 		Files.copy(srcFile, targetFile);
+		
 	}
 	public static void getHighLighter(WebElement element) {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -69,12 +71,26 @@ public class Utilities extends BaseClass {
 	}
 	
 	
+	public static void clickDynamicElement(List<WebElement> element, int index) {
+		for(int i = 0; i<element.size(); i++) {
+	    	if (i>=index) { //The first element/product/index
+	    		element.get(i).click();
+	    		break;
+	    	}
+		}
 	
 	
-	
-	
-	
-	
+		}
+	public static void clickCheckBox(WebElement checkbox) {
+		if(checkbox.isSelected()) {
+			System.out.println("the checkbox is already selected");
+		} else if(!checkbox.isSelected()) {
+			checkbox.click();
+			System.out.println("Now selecting the checkbox");
+		} else {
+			System.out.println("Checkbox did not select");
+		}
+	}
 	
 	
 	
